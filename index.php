@@ -17,12 +17,14 @@
         protected $type='animal';
         protected $name='John';
         protected $hair_color='black';
-        protected $feet=['front-left','front-right','back-left','back-right'];
+        private $feet=['front-left','front-right','back-left','back-right'];
+        public $weight='small';
     
-     function __construct($type,$name,$hair_color){
+     function __construct($type,$name,$hair_color,$weight){
         $this->type=$type;
         $this->name=$name;
         $this->hair_color=$hair_color;
+        $this->weight=$weight;
         
     }
     public function run(){
@@ -41,7 +43,7 @@
     }
 }
     // 實例化 (instance)
-    $cat=new Animal('cat','kitty','white');
+    $cat=new Animal('cat','kitty','white','big');
 
     // echo $cat->type;
     echo $cat->getName();
@@ -64,6 +66,9 @@
         }
         function jump(){
             echo $this->name . "jumpping 5mm";
+        }
+        function getFeet(){
+            return $this->feet;
         }
 
     }
@@ -93,7 +98,7 @@
     ?>
     <h2>繼承dog</h2>
     <?php
-        class Dog extends Animal{
+        class Dog2 extends Animal{
         protected $type='dog';
         protected $name='WanWan';
         function __construct($hair_color,$weight){
@@ -102,15 +107,57 @@
         }
 
     }
-    $mydog=new Dog('brown','big');
+    $mydog=new Dog2('brown','big');
     echo $mydog->getName();
     echo "<br>";
     echo $mydog->run();
-    echo $mydog->weight();
+    echo $mydog->weight;
     
     $mydog->setName('WW');
     echo $mydog->getName();
     ?>
+<h1>靜態宣告</h1>
+<?php
 
+class Dog extends Animal implements Behavior{
+    protected $type='dog';
+    protected $name='Doggy';
+    protected static  $count=0;
+    //static $count=0;
+
+    function __construct($hair_color){
+        $this->hair_color=$hair_color;
+        self::$count++;
+    }
+
+    function bark(){
+        echo $this->name . " is barking";
+    }
+
+    function getFeet(){
+        return $this->feet;
+    }
+
+    static function getCount(){
+        return self::$count;
+    }
+
+    function jump(){
+        echo $this->name . " jumpping 1m";
+    }
+}
+
+echo Dog::getCount();
+
+$dog1=new Dog('brown');
+$dog2=new Dog('black');
+$dog3=new Dog('orange');
+$dog4=new Dog('white');
+$dog5=new Dog('white');
+
+
+echo Dog::getCount();
+
+?>
 </body>
 </html>
