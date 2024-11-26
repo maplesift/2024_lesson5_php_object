@@ -67,14 +67,16 @@ class DB{
         if(isset($array['id'])){
             // update 改
             // update table set `欄位1`='值1',`欄位2`='值2' where `id`='值';
+            $id=$array['id'];
+            unset($array['id']);
             $set=$this->a2s($array);
-            $sql ="UPDATE $this->table SET ".join(',',$set)." where `id`='{$array['id']}'";
-
+            $sql ="UPDATE $this->table SET ".join(',',$set)." where `id`='$id'";
         }else{
             // insert 增
             $cols=array_keys($array);
             $sql="INSERT INTO $this->table (`".join("`,`",$cols)."`) VALUES('".join("','",$array)."')";
         }
+        // ****看sql與法的最終結果  echo $sql;
         echo $sql;
         return $this->pdo->exec($sql);
 
@@ -134,7 +136,7 @@ $DEPT=new DB('dept');
 // $dept=$DEPT->find(2);
 $dept=$DEPT->find(['code'=>'404']);
 // $DEPT->save(['code'=>'504']);
-$DEPT->save(['code'=>'504','id'=>'7','name'=>'資訊部']);
+$DEPT->save(['id'=>'8','name'=>'資訊發展部']);
 // $DEPT->del(2);
 // $DEPT->del(['code'=>'504']);
 
