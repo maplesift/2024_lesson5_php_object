@@ -100,7 +100,8 @@ $DEPT=new DB('dept');
 
 // $dept=$DEPT->q("SELECT * FROM dept");
 // $dept=$DEPT->all(['id'=>3]);
-$dept=$DEPT->find(2);
+// $dept=$DEPT->find(2);
+$dept=$DEPT->find(['code'=>'404']);
 
 
 
