@@ -10,6 +10,10 @@ class DB{
         $this->pdo=new PDO($this->dsn,'root','');
     }
 
+    function all(){
+        return $this->q("SELECT * FROM $this->table");
+    }
+
     function q($sql){
         return $this->pdo->query($sql)->fetchall();
     }
@@ -25,6 +29,8 @@ function dd($array){
 
 $DEPT=new DB('dept');
 
-$dept=$DEPT->q("SELECT * FROM dept");
+// $dept=$DEPT->q("SELECT * FROM dept");
+$dept=$DEPT->all();
+
 
 dd($dept);
