@@ -61,6 +61,19 @@ class DB{
 
         return $this->fetchOne($sql);
     }
+    // 刪除
+    function del($id){
+        $sql="DELETE FROM $this->table ";
+
+            if(is_array($id)){
+                $where=$this->a2s($id);
+                $sql=$sql . " WHERE ". join(" && ",$where);
+            }else{
+                //$sql=$sql.$arg[0];
+                $sql .= "WHERE `id`='$id'";
+            }
+        return $this->pdo->exec($sql);
+    }
     /**
      * 把陣列轉成條件字串陣列
      * array to string 陣列轉成字串
@@ -103,6 +116,7 @@ $DEPT=new DB('dept');
 // $dept=$DEPT->find(2);
 $dept=$DEPT->find(['code'=>'404']);
 
-
+// $DEPT->del(2);
+// $DEPT->del(['code'=>'504']);
 
 dd($dept);
