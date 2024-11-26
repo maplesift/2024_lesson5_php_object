@@ -76,6 +76,7 @@ function dd($array){
 $DEPT=new DB('dept');
 
 // $dept=$DEPT->q("SELECT * FROM dept");
+// $dept=$DEPT->all(['id'=>3]);
 $dept=$DEPT->all(" Order by `id` DESC");
 
 
