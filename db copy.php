@@ -1,7 +1,7 @@
 <?php
 
 class DB{
-    protected $dsn="mysql:host=localhost;charset=utf8;dbname=db03";
+    protected $dsn="mysql:host=localhost;charset=utf8;dbname=db99";
     protected $pdo;
     protected $table;
 
@@ -12,9 +12,9 @@ class DB{
 
     /**
      * 撈出全部資料
-     * 1.整張資料表
-     * 2.有條件
-     * 3.其他sql功能
+     * 1. 整張資料表
+     * 2. 有條件
+     * 3. 其他SQL功能
      */
     function all(...$arg){
         $sql="SELECT * FROM $this->table ";
@@ -34,12 +34,12 @@ class DB{
             $sql=$sql . $arg[1];
         }
 
-
         return $this->fetchAll($sql);
     }
+
+    
     /**
      * 把陣列轉成條件字串陣列
-     * array to string 陣列轉成字串
      */
     function a2s($array){
         $tmp=[];
@@ -49,9 +49,9 @@ class DB{
         return $tmp;
     }
 
-    
+
     function fetchOne($sql){
-        // echo $sql
+        //echo $sql;
         return $this->pdo->query($sql)->fetch();
     }
     
@@ -62,20 +62,21 @@ class DB{
     
 }
 
-// function q($sql){
-//     return $this->pdo->query($sql)->fetchall();
-// }
+/* function q($sql){
+    return $this->pdo->query($sql)->fetchAll();
+} */
+
 function dd($array){
     echo "<pre>";
     print_r($array);
     echo "</pre>";
-
 }
-// 實例化
+
+
 $DEPT=new DB('dept');
 
-// $dept=$DEPT->q("SELECT * FROM dept");
-$dept=$DEPT->all([" Order by `id` DESC"]);
-
+//$dept=$DEPT->q("SELECT * FROM dept");
+$dept=$DEPT->all(" Order by `id` DESC");
 
 dd($dept);
+
