@@ -7,6 +7,7 @@ class DB{
 
     function __construct($table){
         $this->table=$table;
+
         $this->pdo=new PDO($this->dsn,'root','');
     }
 
@@ -33,11 +34,10 @@ class DB{
         if(!empty($arg[1])){
             $sql=$sql . $arg[1];
         }
-        
-
-
         return $this->fetchAll($sql);
     }
+
+    
         /**
      * 撈出單筆資料
      * 1.整張資料表
@@ -119,6 +119,10 @@ class DB{
     
 }
 
+// $b=0;
+// $a=[1,2,3,4];
+// $b=all($a);
+// print_r($rows);
 // function q($sql){
 //     return $this->pdo->query($sql)->fetchall();
 // }

@@ -7,17 +7,19 @@
 </head>
 <body>
     <div>
-        <a href="./index">物件導向</a>
+        <a href="./index.php">物件導向</a>
     </div>
     <h1>物件宣告</h1>
     <?php
-
+    // 禁止緩存
+header("Cache-Control: no-cache, must-revalidate");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
     class Animal{
         // 宣告隱藏
         protected $type='animal';
         protected $name='John';
         protected $hair_color='black';
-        private $feet=['front-left','front-right','back-left','back-right'];
+        public $feet=['front-left','front-right','back-left','back-right'];
         public $weight='small';
     
      function __construct($type,$name,$hair_color,$weight){
@@ -33,7 +35,7 @@
     
     public function speed(){
         echo $this->name.'is running at 20km/h';
-
+        print_r($this->feet);
     }
     public function getName(){
         return $this->name;
@@ -157,6 +159,21 @@ $dog5=new Dog('white');
 
 
 echo Dog::getCount();
+
+?>
+
+<?php
+
+
+$array1=[
+    'img'=>[
+        'name' => 'mm.aa',
+        'error' => '0']
+        ,'cat'=>[1=>1,123]
+];
+echo "<pre>";
+print_r($array1['img']['name']);
+echo "</pre>";
 
 ?>
 </body>
